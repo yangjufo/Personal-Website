@@ -26,6 +26,7 @@ SECRET_KEY = 'xl+)y&lv-k2&^g_-shou)sfnm(=gg)ulrrdbm^$m$i^(r8kw=t'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "127.0.0.1",
     "45.77.207.46",
 ]
 
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
