@@ -1,2 +1,5 @@
 # Personal-Website
-Django based blog & project preview
+Implementation of Tutorial sample projects  
+
+https://docs.djangoproject.com/en/2.1/
+
