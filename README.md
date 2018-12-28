@@ -1,7 +1,7 @@
 # Personal-Website
 A personal website developed with Django, including blogs, projects and other interesting things.
 
-Deployed on AWS. Address: http://www.jianyang995.com/
+Deployed on AWS. Address: https://www.jianyang995.com/
 
 ## Blog
 Almost done, but some small changes will be added. 
