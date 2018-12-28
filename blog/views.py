@@ -8,6 +8,20 @@ from markdown.extensions.toc import TocExtension
 from .models import Post, Category, Tag
 from comments.forms import CommentForm
 
+MONTH_NAME_MAP = {
+    1: 'Jan',
+    2: 'Feb',
+    3: 'Mar',
+    4: 'Apr',
+    5: 'May',
+    6: 'June',
+    7: 'July',
+    8: 'Aug',
+    9: 'Sep',
+    10: 'Oct',
+    11: 'Nov',
+    12: 'Dec'
+}
 
 class PostDetailView(DetailView):    
     model = Post
@@ -46,15 +60,19 @@ class IndexView(ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'post_list'  
-    paginate_by = 5
+    paginate_by = 5    
+    title = 'Blog | Jian Yang'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)  
+        context = super().get_context_data(**kwargs)
         paginator = context.get('paginator')
         page = context.get('page_obj')
         is_paginated = context.get('is_paginated')
         pagination_data = self.pagination_data(paginator, page, is_paginated)
         context.update(pagination_data)
+        context.update({
+            'title' : self.title,
+        })
         return context
     
     def pagination_data(self, paginator, page, is_paginated):
@@ -98,21 +116,24 @@ class IndexView(ListView):
         
 
 
-class ArchivesView(IndexView):    
+class ArchivesView(IndexView):      
     def get_queryset(self):
         year = self.kwargs.get('year')
         month = self.kwargs.get('month')
+        self.title = MONTH_NAME_MAP[month] + ' ' + str(year) + ' | Jian Yang'
         return super(ArchivesView, self).get_queryset().filter(created_time__year=year,
                                     created_time__month=month)
 
 
-class CategoryView(IndexView):        
+class CategoryView(IndexView):         
     def get_queryset(self):
         cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
+        self.title = cate.name + ' | Jian Yang'
         return super(CategoryView, self).get_queryset().filter(category=cate)
 
-class TagView(IndexView):
+class TagView(IndexView):    
     def get_queryset(self):
         tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        self.title = tag.name + ' | Jian Yang'
         return super(TagView, self).get_queryset().filter(tags=tag)
 

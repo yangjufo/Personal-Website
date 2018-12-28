@@ -1,0 +1,105 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock title%}</title>
+
+        <!-- meta -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- favicon -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon/favicon.ico' %}"/>
+
+        <!-- css -->
+        <link rel="stylesheet" type = "text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type = "text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" type = "text/css" href="{% static 'blog/css/pace.css' %}">
+        <link rel="stylesheet" type = "text/css" href="{% static 'blog/css/custom.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}"
+
+        <!-- js -->
+        <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{% static 'blog/js/pace.min.js' %}"></script>
+        <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
+      
+    </head>
+
+    <body>
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1 class="logo-h1"><a href="{% url 'blog:index' %}"><b>Jian</b> Yang</a></h1> 
+                        <h4 class="logo-h4">A man who is always on the way.</h4>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="Home">Home</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="Blog">Blog</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'project' %}" data-hover="Projects">Projects</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'about' %}" data-hover="About">About</a></li>
+                                <!-- <li class="cl-effect-11"><a href="{% url 'contact' %}" data-hover="Contact">Contact</a></li> -->                                
+                            </ul>
+                            <div id="search-form-full" class="search-form-full">
+                                <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+                                    <input type="search" name="q" placeholder="Search" required>
+                                    <button type="submit"><span class="ion-ios-search-strong"></span></button>
+                                </form>
+                            </div>
+                        </div><!-- /.navbar-collapse -->                                                                        
+                    </nav>                                    
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+    </div>
+    {% block main-body %}
+    {% endblock main-body %}    
+    <footer id="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copyright">&copy; 2018 - Jian Yang</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="overlay overlay-hugeinc">
+        <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+        <nav>
+            <ul>
+                <li><a href="{% url 'blog:index' %}" data-hover="Home">Home</a></li>
+                <li><a href="{% url 'blog:index' %}" data-hover="Blog">Blog</a></li>
+                <li><a href="{% url 'project' %}" data-hover="Projects">Projects</a></li>
+                <li><a href="{% url 'about' %}" data-hover="About">About</a></li>
+                <!-- <li><a href="{% url 'contact' %}" data-hover="Contact">Contact</a></li> -->
+            </ul>
+            <div id="header-search-box">
+                <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+                <div id="search-form" class="search-form">
+                    <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+                        <input type="search" name="q" placeholder="Search" required>
+                        <button type="submit"><span class="ion-ios-search-strong"></span></button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <script src="{% static 'blog/js/script.js' %}"></script>
+
+    </body>
+</html>

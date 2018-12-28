@@ -1,4 +1,7 @@
 {% extends 'blog/base.html' %}
+{% block title %}
+{{ title }}
+{% endblock title%}
 {% block main %}
     {% for post in post_list %}
     <article class="post post-{{ post.pk }}">

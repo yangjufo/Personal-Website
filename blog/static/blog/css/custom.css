@@ -143,7 +143,7 @@ img {
 
 .main-nav {
     margin-top: 30px;
-    max-width: 70%;
+    max-width: 72%;
 }
 
 .main-nav a {
@@ -471,18 +471,36 @@ img {
  * 7.0 - Header Search Bar
  */
 
-.search-form {    
-    width: 25%;
+ #header-search-box {
     position: absolute;
+    right: 38px;
+    top: 8px;
+}
+
+.search-form {
+    display: none;
+    width: 25%;
     min-width: 200px;
-    right: 15px;
-    top: 20px;    
-    border: 1px solid #ddd;
-    min-height: 42px;
+    position: absolute;    
+    right: -6px;
+    top: 33px;
 }
 
 #search-menu span {
     font-size: 20px;
+}
+
+.search-form-full {        
+    width: 25%;
+    position: absolute;    
+    right: 15px;
+    top: 17px;        
+}
+
+#searchform {
+    position: relative;
+    border: 1px solid #ddd;
+    min-height: 42px;
 }
 
 #searchform input[type=search] {
@@ -492,6 +510,11 @@ img {
     left: 0;
     padding: 10px 30px 10px 10px;
     z-index: 99;
+}
+
+.search-form #searchform input[type=search] {
+    font-size: 20px;
+    padding: 5px 30px 5px 10px;;
 }
 
 #searchform button {
