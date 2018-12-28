@@ -1,23 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Black &amp; White</title>
+		<title>Jian Yang  Blog&amp;Project&amp;Entertainment</title>
 
 		<!-- meta -->
 		<meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	    <!-- css -->
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/ionicons.min.css">
-		<link rel="stylesheet" href="css/pace.css">
-	    <link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" type = "text/css" href="{% static 'blog/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type = "text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+		<link rel="stylesheet" type = "text/css" href="{% static 'blog/css/pace.css' %}">
+		<link rel="stylesheet" type = "text/css" href="{% static 'blog/css/custom.css' %}">
+		<link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}"
 
-	    <!-- js -->
-	    <script src="js/jquery-2.1.3.min.js"></script>
-	    <script src="js/bootstrap.min.js"></script>
-	    <script src="js/pace.min.js"></script>
-	    <script src="js/modernizr.custom.js"></script>
+		<!-- js -->
+		<script src="{% static 'blog/js/jquery-2.1.3.min.js' %}"></script>
+		<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'blog/js/pace.min.js' %}"></script>
+		<script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
 	</head>
 
 	<body id="page">
@@ -26,7 +28,7 @@
 				<div class="row">
 					<div class="col-md-4 col-sm-5 col-xs-8">
 						<div class="logo">
-							<h1><a href="index.html"><b>Black</b> &amp; White</a></h1>
+							<h1><a href="{% url 'blog:index' %}"><b>Jian</b> Yang</a></h1>
 						</div>
 					</div><!-- col-md-4 -->
 					<div class="col-md-8 col-sm-7 col-xs-4">
@@ -39,10 +41,11 @@
 
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   								<ul class="nav navbar-nav navbar-right">
-    								<li class="cl-effect-11"><a href="index.html" data-hover="Home">Home</a></li>
-    								<li class="cl-effect-11"><a href="full-width.html" data-hover="Blog">Blog</a></li>
-    								<li class="cl-effect-11"><a href="about.html" data-hover="About">About</a></li>
-    								<li class="cl-effect-11"><a href="contact.html" data-hover="Contact">Contact</a></li>
+										<li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="Home">Home</a></li>
+										<li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="Blog">Blog</a></li>
+										<li class="cl-effect-11"><a href="{% url 'project' %}" data-hover="Project">Project</a></li>
+										<li class="cl-effect-11"><a href="{% url 'about' %}" data-hover="About">About</a></li>
+										<li class="cl-effect-11"><a href="{% url 'contact' %}" data-hover="Contact">Contact</a></li>
   								</ul>
 							</div><!-- /.navbar-collapse -->
 						</nav>
@@ -88,7 +91,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p class="copyright">&copy; 2014 ThemeWagon.com</p>
+						<p class="copyright">&copy; 2018 Jian Yang</p>
 					</div>
 				</div>
 			</div>
@@ -98,16 +101,17 @@
 		<div class="overlay overlay-hugeinc">
 			<button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
 			<nav>
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="full-width.html">Blog</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="contact.html">Contact</a></li>
+				<ul>					
+					<li><a href="{% url 'blog:index' %}" data-hover="Home">Home</a></li>
+					<li><a href="{% url 'blog:index' %}" data-hover="Blog">Blog</a></li>
+					<li><a href="{% url 'project' %}" data-hover="Project">Project</a></li>
+					<li><a href="{% url 'about' %}" data-hover="About">About</a></li>
+					<li><a href="{% url 'contact' %}" data-hover="Contact">Contact</a></li>
 				</ul>
 			</nav>
 		</div>
 
-		<script src="js/script.js"></script>
+		<script src="{% static 'blog/js/script.js' %}"></script>
 		
 	</body>
 </html>

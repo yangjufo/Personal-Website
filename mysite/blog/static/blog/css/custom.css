@@ -677,6 +677,18 @@ img {
     padding: 12px 20px;
 }
 
+.github a {
+    padding: 12px 15px;
+}
+
+.linkedin a {
+    padding: 12px 15px;
+}
+
+.email a {
+    padding: 12px 15px;
+}
+
 /**
  * 10.0 - Contact Form
  */
