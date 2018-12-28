@@ -1,0 +1,170 @@
+{% load static %}
+{% load blog_tags %}
+<html lang="en">
+    <head>
+        <title>Welcome | Jian Yang</title>
+
+        <!-- meta -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- favicon -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon/favicon.ico' %}"/>
+
+        <!-- css -->
+        <link rel="stylesheet" type = "text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type = "text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" type = "text/css" href="{% static 'blog/css/pace.css' %}">
+        <link rel="stylesheet" type = "text/css" href="{% static 'blog/css/custom.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}"
+
+        <!-- js -->
+        <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{% static 'blog/js/pace.min.js' %}"></script>
+        <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
+
+        <style>
+            span.highlighted {
+                color: red;
+            }        
+        </style>        
+    </head>
+
+    <body>
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1 class="logo-h1"><a href="{% url 'blog:index' %}"><b>Jian</b> Yang</a></h1> 
+                        <h4 class="logo-h4">A man who is always on the way.</h4>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="Home">Home</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="Blog">Blog</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'project' %}" data-hover="Projects">Projects</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'about' %}" data-hover="About">About</a></li>
+                                <!-- <li class="cl-effect-11"><a href="{% url 'contact' %}" data-hover="Contact">Contact</a></li> -->
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </nav>                
+                    <div id="searchform" class="search-form">                        
+                        <input type="search" name="q" placeholder="Search" required>
+                        <button type="submit"><span class="ion-ios-search-strong"></span></button>                                            
+                    </div>
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+    </div>
+
+    <div class="content-body">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8">
+                    {% block main %}
+                    {% endblock main %}
+                </main>
+                <aside class="col-md-4">
+                    {% block toc %}
+                    {% endblock toc %}
+                    <div class="widget widget-recent-posts">
+                        <h3 class="widget-title">Latest</h3>
+                        {% get_recent_posts as recent_post_list %}
+                        <ul>                    
+                            {% for post in recent_post_list %}
+                            <li>
+                                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </li>
+                            {% empty %}
+                            No post!
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="widget widget-archives">
+                        <h3 class="widget-title">Archives</h3>
+                        {% archives as date_list %}
+                        <ul>
+                            {% for a_date in date_list %}
+                            <li>
+                                <a href="{% url 'blog:archives' a_date.year a_date.month %}">{{ a_date|date:'F' }}, {{ a_date.year }}</a>
+                            </li>
+                            {% empty %}
+                            No archive!
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="widget widget-category">
+                        <h3 class="widget-title">Categories</h3>
+                        {% get_categories as category_list %}
+                        <ul>
+                            {% for category in category_list %}                        
+                            <li>
+                                <a href="{% url 'blog:category' category.pk %}">{{ category.name }}<span class="post-count"> ({{ category.num_posts }})</span></a>
+                            </li>
+                            {% empty %}
+                            No catogory!
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="widget widget-tag-cloud">
+                        <h3 class="widget-title">Tags</h3>
+                        {% get_tags as tag_list %}
+                        <ul>
+                            {% for tag in tag_list %}
+                            <li>
+                                <a href="{% url 'blog:tag' tag.pk %}">{{ tag.name }}</a>
+                            </li>
+                            {% empty %}
+                            No tag!
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="rss">
+                        <a href="{% url 'rss' %}"><span class="ion-social-rss-outline"></span> RSS Subscription</a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+    <footer id="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copyright">&copy; 2018 - Jian Yang</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="overlay overlay-hugeinc">
+        <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+        <nav>
+            <ul>
+                <li><a href="{% url 'blog:index' %}" data-hover="Home">Home</a></li>
+                <li><a href="{% url 'blog:index' %}" data-hover="Blog">Blog</a></li>
+                <li><a href="{% url 'project' %}" data-hover="Projects">Projects</a></li>
+                <li><a href="{% url 'about' %}" data-hover="About">About</a></li>
+                <!-- <li><a href="{% url 'contact' %}" data-hover="Contact">Contact</a></li> -->
+            </ul>
+        </nav>
+    </div>
+
+    <script src="{% static 'blog/js/script.js' %}"></script>
+
+    </body>
+</html>
