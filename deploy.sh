@@ -1,12 +1,14 @@
 #!/bin/bash
 
+source_folder=/home/ubuntu/sites/www.jianyang995.com
 
-cd /home/ubuntu/sites/jianyang995.com/Personal-Website/
+cd $source_folder/Personal-Website
 git pull
+sed -i 's/DEBUG = True/DEBUG = False/' ./mysite/settings.py 
 
-../env/bin/pip install -r requirements.txt
-../env/bin/python manage.py collectstatic --noinput
-../env/bin/python manage.py migrate
+$source_folder/env/bin/pip install -r requirements.txt
+$source_folder/env/bin/python manage.py collectstatic --noinput
+$source_folder/env/bin/python manage.py migrate
 
 sudo service nginx reload
-../env/bin/gunicorn --bind unix:/tmp/jianyang995.com.socket mysite.wsgi:application&
+$source_folder/env/bin/gunicorn --bind unix:/tmp/www.jianyang995.com.socket mysite.wsgi:application&
