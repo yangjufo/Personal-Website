@@ -62,7 +62,8 @@
         {% for project in project_list %}
             <div class="project-column">
                 <div class="project-content">
-                    <img src="{% static project.image %}" alt="Mountains" style="width:100%">
+                    <a href="{{ project.get_absolute_url }}"><img src="{{ project.image }}" alt="Cover Image"
+                                                                  style="width:100%"></a>
                     <h3 class="entry-title" style="margin-bottom: 10px;">
                         <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
                     </h3>

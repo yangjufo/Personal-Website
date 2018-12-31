@@ -23,7 +23,7 @@ class Tag(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=70)
     body = models.TextField()
-    image = models.CharField(max_length=100, default="img/profile.jpg")
+    image = models.URLField(default="https://www.jianyang995.com/static/img/profile.jpg")
     position = models.IntegerField(default=0)
     source = models.URLField(blank=True)
     demo = models.URLField(blank=True)
