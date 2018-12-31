@@ -1,23 +1,37 @@
+<head>
+    <style>
+        .source-code, .demo-link {
+            text-decoration: underline;
+        }
+    </style>
+</head>
 {% extends 'myprojects/base.html' %}
 {% block title %}
     {{ project.title }}
-{% endblock title%}
+{% endblock title %}
 {% block main %}
     <article class="project project-{{ project.pk }}">
         <header class="entry-header">
             <h1 class="entry-title">{{ project.title }}</h1>
             <div class="entry-meta">
-                <span class="project-category"><a href="{% url 'myprojects:category' project.category.pk %}">{{ project.category.name }}</a></span>
-                <span class="project-date"><a href="{% url 'myprojects:archives' project.created_time.year %}"><time class="entry-date"
-                                                          datetime="{{ project.created_time }}">{{ project.created_time|date:'F' }}, {{ project.created_time.year }}, </time></a></span>
-                <!--<span class="project-author"><a href="#">Jian Yang</a></span>-->                
-                <span class="comments-link"><a href="{{ project.get_absolute_url }}#comment-area">{{ project.projectcomment_set.count }} Comment {{ project.comment_set.count|pluralize }}</a></span>
+                <span class="project-category"><a
+                        href="{% url 'myprojects:category' project.category.pk %}">{{ project.category.name }}</a></span>
+                <span class="project-date"><a href="{% url 'myprojects:archives' project.created_time.year %}"><time
+                        class="entry-date"
+                        datetime="{{ project.created_time }}">{{ project.created_time|date:'F' }}, {{ project.created_time.year }}, </time></a></span>
+                <!--<span class="project-author"><a href="#">Jian Yang</a></span>-->
+                <span class="comments-link"><a
+                        href="{{ project.get_absolute_url }}#comment-area">{{ project.projectcomment_set.count }} Comment {{ project.comment_set.count|pluralize }}</a></span>
                 <span class="views-count"><a href="#">{{ project.views }} View</a></span>
+                <br>
+                <span><a class="source-code" href="{{ project.source }}">Source Code</a></span>
+                <span style="padding-left: 20px"><a class="demo-link"
+                                                    href= {{ project.demo }}>Demo Link</a></span>
             </div>
         </header>
-        <div class="entry-content clearfix">            
+        <div class="entry-content clearfix">
             <div class="widget-tag-cloud">
-                <ul>                    
+                <ul>
                     {% for tag in project.tags.all %}
                         <li><a href="{% url 'myprojects:tag' tag.pk %}">{{ tag.name }}</a></li>
                     {% endfor %}
@@ -40,7 +54,7 @@
                 <div class="col-md-4">
                     <label for="{{ form.email.id_for_label }}"><span class="red-star">★</span>Email</label>
                     {{ form.email }}
-                    {{ form.email.errors }}                    
+                    {{ form.email.errors }}
                 </div>
                 <div class="col-md-4">
                     <label for="{{ form.url.id_for_label }}">Link</label>
@@ -58,17 +72,17 @@
         <div class="comment-list-panel">
             <h3><span>{{ project.comment_set.count }}</span> Comments</h3>
             {% for comment in comment_list %}
-                <ul class="comment-list list-unstyled">                
+                <ul class="comment-list list-unstyled">
                     <li class="comment-item">
                         <span class="nickname">{{ comment.name }}</span>
                         <time class="submit-date">{{ comment.created_time }}</time>
                         <div class="text">
-                            {{ comment.text }}                        
+                            {{ comment.text }}
                         </div>
                     </li>
                 </ul>
             {% empty %}
-            No comment!
+                No comment!
             {% endfor %}
         </div>
     </section>
@@ -76,6 +90,6 @@
 {% block toc %}
     <div class="widget widget-content">
         <h3 class="widget-title">Catalog</h3>
-        {{ project.toc|safe }}        
+        {{ project.toc|safe }}
     </div>
 {% endblock toc %}
