@@ -1,0 +1,83 @@
+<head>
+    <style>
+        span.highlighted {
+            color: red;
+        }
+    </style>
+</head>
+
+{% extends 'basic/base.html' %}
+{% load myprojects_tags %}
+{% block title %}
+    Projects | Jian Yang
+{% endblock title%}
+{% block main-body %}
+    <div class="content-body">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8">
+                    {% block main %}
+                    {% endblock main %}
+                </main>
+                <aside class="col-md-4">
+                    {% block toc %}
+                    {% endblock toc %}
+                    <div class="widget widget-recent-projects">
+                        <h3 class="widget-title">Latest</h3>
+                        {% get_recent_projects as recent_project_list %}
+                        <ul>                    
+                            {% for project in recent_project_list %}
+                            <li>
+                                <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+                            </li>
+                            {% empty %}
+                            No project!
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="widget widget-archives">
+                        <h3 class="widget-title">Archives</h3>
+                        {% archives as date_list %}
+                        <ul>
+                            {% for a_date in date_list %}
+                            <li>
+                                <a href="{% url 'myprojects:archives' a_date.year %}">{{ a_date.year }}</a>
+                            </li>
+                            {% empty %}
+                            No archive!
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="widget widget-category">
+                        <h3 class="widget-title">Categories</h3>
+                        {% get_categories as category_list %}
+                        <ul>
+                            {% for category in category_list %}                        
+                            <li>
+                                <a href="{% url 'myprojects:category' category.pk %}">{{ category.name }}<span class="project-count"> ({{ category.num_projects }})</span></a>
+                            </li>
+                            {% empty %}
+                            No category!
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="widget widget-tag-cloud">
+                        <h3 class="widget-title">Tags</h3>
+                        {% get_tags as tag_list %}
+                        <ul>
+                            {% for tag in tag_list %}
+                            <li>
+                                <a href="{% url 'myprojects:tag' tag.pk %}">{{ tag.name }}</a>
+                            </li>
+                            {% empty %}
+                            No tag!
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock main-body %}
