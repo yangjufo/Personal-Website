@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <title>{% block title %}{% endblock title%}</title>
-
+        {% block style %}{% endblock style %}
         <!-- meta -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
         <link rel="stylesheet" type = "text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type = "text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" type = "text/css" href="{% static 'myblog/css/pace.css' %}">
-        <link rel="stylesheet" type = "text/css" href="{% static 'myblog/css/custom.css' %}">
+        <link rel="stylesheet" type = "text/css" href="{% static 'basic/css/custom.css' %}">
         <link rel="stylesheet" href="{% static 'myblog/css/highlights/github.css' %}">
 
         <!-- js -->
@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-5 col-xs-8">
                     <div class="logo">
-                        <h1 class="logo-h1"><a href="{% url 'myblog:index' %}"><b>Jian</b> Yang</a></h1>
+                        <h1 class="logo-h1"><a href="{% url 'index' %}"><b>Jian</b> Yang</a></h1>
                         <h4 class="logo-h4">A man who is always on the way.</h4>
                     </div>
                 </div><!-- col-md-4 -->
@@ -45,7 +45,7 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="cl-effect-11"><a href="{% url 'myprojects:index' %}" data-hover="Home">Home</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'index' %}" data-hover="Home">Home</a></li>
                                 <li class="cl-effect-11"><a href="{% url 'myblog:index' %}" data-hover="Blog">Blog</a></li>
                                 <li class="cl-effect-11"><a href="{% url 'myprojects:index' %}" data-hover="Projects">Projects</a></li>
                                 <li class="cl-effect-11"><a href="{% url 'about' %}" data-hover="About">About</a></li>
@@ -68,7 +68,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="copyright">&copy; 2018 - <a href="{% url 'about' %}">Jian Yang</a></p>
+                    <p class="copyright" >&copy; 2018 Jian Yang All rights reserved </p>
                 </div>
             </div>
         </div>

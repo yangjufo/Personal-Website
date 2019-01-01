@@ -1,58 +1,151 @@
 {% extends 'basic/base.html' %}
+{% load static %}
+{% load myblog_tags %}
+{% load myprojects_tags %}
 {% block title %}
     Welcome | Jian Yang
-{% endblock title%}
-{% block main %}
-    {% for post in post_list %}
-    <article class="post post-{{ post.pk }}">
-        <header class="entry-header">
-            <h1 class="entry-title">
-                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-            </h1>
-            <div class="entry-meta">
-                <span class="post-category"><a href="#">{{ post.category }}</a></span>
-                <span class="post-date"><a href="#"><time class="entry-date"
-                                                          datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
-                <!--<span class="post-author"><a href="#"></a></span>-->
-                <span class="comments-link"><a href="{{ post.get_absolute_url }}#comment-are">{{ post.comment_set.count }} Comment{{ post.comment_set.count|pluralize }}</a></span>
-                <span class="views-count"><a href="{{ post.get_absolute_url }}">{{ post.views }} Read</a></span>
+{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'basic/css/mycalendar.css' %}">
+    <style>
+        .index-row {
+            margin: 8px -16px;
+        }
+
+        /* Add padding BETWEEN each column (if you want) */
+        .index-row,
+        .index-row > .index-column {
+            padding: 8px;
+        }
+
+        /* Create four equal columns that floats next to each other */
+        .index-column {
+            float: left;
+            margin-bottom: 5%;
+            width: 45%;
+        }
+
+        /* Clear floats after rows */
+        .index-row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Content */
+        .index-content {
+            background-color: white;
+        }
+
+        /* Responsive layout - makes a two column-layout instead of four columns */
+        @media screen and (max-width: 900px) {
+            .index-column {
+                width: 50%;
+            }
+        }
+
+        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+            .index-column {
+                width: 100%;
+            }
+        }
+
+        .welcome-p {
+            margin-top: 5%;
+            font-size: 1.4em;
+        }
+
+        .list-li {
+            font-size: 1.2em;
+            margin-bottom: 1%;
+        }
+
+    </style>
+{% endblock style %}
+{% block main-body %}
+    <div class="container">
+        <div class="index-row">
+            <div class="index-column">
+                <section class="calendar-month" id="january">
+                    <header class="calendar-header">
+                        <h1 class="calendar-h1"> {{ current_date|date:'F' }} {{ current_date.year }}</h1>
+                    </header>
+
+                    <article class="calendar-article">
+                        <div class="days">
+                            <b>SU</b>
+                            <b>MO</b>
+                            <b>TU</b>
+                            <b>WE</b>
+                            <b>TH</b>
+                            <b>FR</b>
+                            <b>SA</b>
+                        </div>
+                        <div class="dates">
+                            {% for day in day_before %}
+                                <span class="disable">{{ day }}</span>
+                            {% endfor %}
+
+                            {% for day in day_month %}
+                                {% if day != current_date.day %}
+                                    <span>{{ day }}</span>
+                                {% else %}
+                                    <span class="active">{{ day }}</span>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for day in day_after %}
+                                <span class="disable">{{ day }}</span>
+                            {% endfor %}
+                        </div>
+                    </article>
+                </section>
             </div>
-        </header>
-        <div class="entry-content clearfix">
-            <p>{{ post.excerpt }}</p>
-            <div class="read-more cl-effect-14">
-                <a href="{{ post.get_absolute_url }}" class="more-link">Read more <span class="meta-nav">→</span></a>
+            <div class="index-column">
+                <div class="index-content">
+                    <h1>Welcome</h1>
+                    <p align="justify" class="welcome-p">Thanks for stopping by. Hope you can
+                        find resources here on creativity, innovation and fun! Use the
+                        <a href="{% url 'myblog:index' %}" class="underline-a" data-hover="Blog">Blog</a>
+                        <a href="{% url 'myprojects:index' %}" class="underline-a" data-hover="Projects">Projects</a>
+                        links to explore.
+                    <p align="justify" class="welcome-p">Here are few recent postings and
+                        projects:</p>
+                    {% get_recent_posts 2 as recent_post_list %}
+                    <ul>
+                        {% for post in recent_post_list %}
+                            <li class="list-li">
+                                <a class="underline-a" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </li>
+                        {% empty %}
+                            No post!
+                        {% endfor %}
+                    </ul>
+                    {% get_recent_projects 2 as recent_project_list %}
+                    <ul>
+                        {% for project in recent_project_list %}
+                            <li class="list-li">
+                                <a class="underline-a"
+                                   href="{{ project.get_absolute_url }}">{{ project.title }}</a>--{{ project.excerpt }}
+                            </li>
+                        {% empty %}
+                            No project!
+                        {% endfor %}
+                    </ul>
+                    <div class="follow-me" style="margin-top:5%;">
+                        <h3 style="margin-bottom:6%;">Follow <a href="{% url 'about' %}" class="underline-a">me</a></h3>
+                        <ul class="social" style="float: left;">
+                            <li class="email" title="yangjufo@gmail.com"><a href="mailto:yangjufo@gmail.com" target="_top"><span class="ion-email"></span></a></li>
+                            <li class="github" title="https://github.com/yangjufo"><a href="https://github.com/yangjufo"><span class="ion-social-github"></span></a></li>
+                            <li class="linkedin" title="https://www.linkedin.com/in/jianyang995"><a href="https://www.linkedin.com/in/jianyang995/"><span class="ion-social-linkedin"></span></a></li>
+                            <li class="facebook" title="https://www.facebook.com/yangjufo"><a href="https://www.facebook.com/yangjufo"><span class="ion-social-facebook"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </article>
-    {% empty %}
-    <div class="no-post">No posted articles!</div>
-    {% endfor %}
-    {% if is_paginated %}    
-    <div class="pagination">
-        {% if first %}
-            <a href="?page=1">1</a>
-        {% endif %}
-        {% if left %}
-            {% if left_has_more %}
-                <span>...</span>
-            {% endif %}
-            {% for i in left %}
-                <a href="?page={{ i }}">{{ i }}</a>
-            {% endfor %}
-        {% endif %}
-        <a href="?page={{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a>
-        {% if right %}
-            {% for i in right %}
-                <a href="?page={{ i }}">{{ i }}</a>
-            {% endfor %}
-            {% if right_has_more %}
-                <span>...</span>
-            {% endif %}
-        {% endif %}
-        {% if last %}
-            <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
-        {% endif %}
     </div>
-    {% endif %}    
-{% endblock main %}
+
+{% endblock main-body %}
+
