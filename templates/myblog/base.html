@@ -25,7 +25,7 @@
                     <div class="widget widget-recent-posts">
                         <h3 class="widget-title">Latest</h3>
                         {% get_recent_posts as recent_post_list %}
-                        <ul>                    
+                        <ul>
                             {% for post in recent_post_list %}
                             <li>
                                 <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
@@ -53,7 +53,7 @@
                         <h3 class="widget-title">Categories</h3>
                         {% get_categories as category_list %}
                         <ul>
-                            {% for category in category_list %}                        
+                            {% for category in category_list %}
                             <li>
                             </li>
                             {% empty %}
@@ -77,6 +77,15 @@
                     </div>
                     <div class="rss">
                         <a href="{% url 'rss' %}"><span class="ion-social-rss-outline"></span>Subscription</a>
+                    </div>
+                    <div class="widget widget-follow-me">
+                        <h3 class="widget-title"><a href="{% url 'about' %}">Follow me</a></h3>
+                        <ul class="social" style="float: left;">
+                            <li class="email" title="yangjufo@gmail.com"><a href="mailto:yangjufo@gmail.com" target="_top"><span class="ion-email"></span></a></li>
+                            <li class="github" title="https://github.com/yangjufo"><a href="https://github.com/yangjufo"><span class="ion-social-github"></span></a></li>
+                            <li class="linkedin" title="https://www.linkedin.com/in/jianyang995"><a href="https://www.linkedin.com/in/jianyang995/"><span class="ion-social-linkedin"></span></a></li>
+                            <li class="facebook" title="https://www.facebook.com/yangjufo"><a href="https://www.facebook.com/yangjufo"><span class="ion-social-facebook"></span></a></li>
+                        </ul>
                     </div>
                 </aside>
             </div>

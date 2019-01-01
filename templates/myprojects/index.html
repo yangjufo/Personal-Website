@@ -1,4 +1,9 @@
-<head>
+{% extends 'myprojects/base.html' %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block style %}
     <style>
         .project-row {
             margin: 8px -16px;
@@ -13,10 +18,8 @@
         /* Create four equal columns that floats next to each other */
         .project-column {
             float: left;
-            margin-left: 5%;
             margin-bottom: 5%;
-            width: 40%;
-            height: 50%;
+            width: 45%;
         }
 
         /* Clear floats after rows */
@@ -49,22 +52,17 @@
                 width: 100%;
             }
         }
-    </style>
-</head>
 
-{% extends 'myprojects/base.html' %}
-{% load static %}
-{% block title %}
-    {{ title }}
-{% endblock title %}
+    </style>
+{% endblock style %}
 {% block main %}
     <div class="project-row">
         {% for project in project_list %}
             <div class="project-column">
                 <div class="project-content">
                     <a href="{{ project.get_absolute_url }}"><img src="{{ project.image }}" alt="Cover Image"
-                                                                  style="width:100%"></a>
-                    <h3 class="entry-title" style="margin-bottom: 10px;">
+                                                                  style="width:400px; height: 200px"></a>
+                    <h3 class="entry-title" style="margin-bottom: 10px; font-size: 1.4em">
                         <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
                     </h3>
                     <div class="entry-meta">
@@ -76,7 +74,7 @@
                         <!--<span class="project-author"><a href="#"></a></span>-->
                         <span class="comments-link"><a
                                 href="{{ project.get_absolute_url }}#comment-are">{{ project.projectcomment_set.count }} Comment{{ project.projectcomment_set.count|pluralize }}</a></span>
-                        <span class="views-count"><a href="{{ project.get_absolute_url }}">{{ project.views }} View</a></span>
+                        <span class="views-count"><a href="{{ project.get_absolute_url }}">{{ project.views }} Read</a></span>
                         <br>
                         <span><a class="source-code" href="{{ project.source }}">Source Code</a></span>
                         <span style="padding-left: 20px"><a class="demo-link"
