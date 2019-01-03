@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.sites.shortcuts import get_current_site
 import datetime
 from calendar import Calendar
 
@@ -28,3 +29,7 @@ def index(request):
 
 def about(request):
     return render(request, 'basic/about.html', context={})
+
+
+def android_browser(request):        
+    return redirect('https://www.jianyang995.com/projects/project/P3');

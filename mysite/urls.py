@@ -26,5 +26,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('projects/', include("myprojects.urls")),
     path('blog/', include('myblog.urls')),
-    path('', include('mycomments.urls')),    
+    path('', include('mycomments.urls')),        
+    path('android_browser/', views.android_browser),
 ]
