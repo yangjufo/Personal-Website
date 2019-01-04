@@ -12,7 +12,7 @@ def get_recent_projects(num=5):
 
 @register.simple_tag
 def archives():
-    return Project.objects.dates('created_time', 'month', order='DESC')
+    return Project.objects.dates('created_time', 'year', order='DESC')
 
 
 @register.simple_tag
