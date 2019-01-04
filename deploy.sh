@@ -3,6 +3,7 @@
 source_folder=/home/ubuntu/sites/www.jianyang995.com
 
 cd $source_folder/Personal-Website
+git reset *
 git pull
 sed -i 's/DEBUG = True/DEBUG = False/' ./mysite/settings.py 
 
