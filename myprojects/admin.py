@@ -4,7 +4,7 @@ from .models import Project, Category, Tag
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['title', 'created_time', 'modified_time', 'category', 'demo', 'author']
+    list_display = ['title', 'position', 'created_time', 'category', 'source', 'demo']
 
 
 admin.site.register(Project, ProjectAdmin)
