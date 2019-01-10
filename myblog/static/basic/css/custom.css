@@ -494,6 +494,7 @@ img {
 
 #site-footer {
     padding-top: 10px;
+    float:bottom;
     padding: 0 0 1.5em 0;
 }
 
