@@ -1,4 +1,4 @@
-Django==2.1.4
+Django>=2.1.5
 django-haystack==2.8.1
 Markdown==3.0.1
 pytz==2018.7
