@@ -4,7 +4,6 @@ A personal website developed with Django, including blogs, projects and other in
 Deployed on AWS. Address: https://www.jianyang995.com/
 
 ## Blog
-Almost done, but some small changes will be added. 
 ### Supports
 1. Category
 2. Tag
@@ -14,9 +13,16 @@ Almost done, but some small changes will be added.
 6. Markdown rendering
 
 ## Project
-Developing.
+### Supports
+1. Category
+2. Tag
+3. Archives (by year)
+4. Comment
+5. Markdown rendering
+6. Demo Link
+7. Source Code Link
 
 ## Ohter
-Developing.
+1. Social Media (Facebook, Linkedin, Github, E-mail)
 
 Reference: https://github.com/zmrenwu/django-blog-tutorial
