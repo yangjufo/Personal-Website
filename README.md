@@ -3,6 +3,18 @@ A personal website developed with Django, including blogs, projects and other in
 
 Deployed on AWS. Address: https://www.jianyang995.com/
 
+## Screenshots
+### Home
+![Home](https://raw.githubusercontent.com/yangjufo/Personal-Website/master/README/Home.png)
+### Blog
+![Blog](https://raw.githubusercontent.com/yangjufo/Personal-Website/master/README/Blog.PNG)
+### Projects
+![Projects](https://raw.githubusercontent.com/yangjufo/Personal-Website/master/README/Projects.PNG)
+### About
+![About](https://raw.githubusercontent.com/yangjufo/Personal-Website/master/README/About.PNG)
+### Search
+![Search](https://raw.githubusercontent.com/yangjufo/Personal-Website/master/README/Search%20Results.PNG)
+
 ## Blog
 ### Supports
 1. Category
@@ -11,6 +23,7 @@ Deployed on AWS. Address: https://www.jianyang995.com/
 4. RSS Subscription
 5. Comment
 6. Markdown rendering
+7. Word serach
 
 ## Project
 ### Supports
