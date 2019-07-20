@@ -35,7 +35,7 @@ Deployed on AWS. Address: https://www.jianyang995.com/
 6. Demo Link
 7. Source Code Link
 
-## Ohter
+## Other
 1. Social Media (Facebook, Linkedin, Github, E-mail)
 
 Reference: https://github.com/zmrenwu/django-blog-tutorial
