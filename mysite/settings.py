@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 HAYSTACK_CONNECTIONS = {
-    'default': {           
+    'default': {
         'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
     },
 }
