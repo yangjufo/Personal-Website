@@ -3,56 +3,56 @@
 {{ title }}
 {% endblock title%}
 {% block main %}
-    {% for post in post_list %}
-    <article class="post post-{{ post.pk }}">
-        <header class="entry-header">
-            <h1 class="entry-title">
-                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-            </h1>
-            <div class="entry-meta">
-                <span class="post-category"><a href="{% url 'myblog:category' post.category.pk %}">{{ post.category }}</a></span>
-                <span class="post-date"><a href="{% url 'myblog:archives' post.created_time.year post.created_time.month %}"><time class="entry-date"
-                                                          datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
-                <!--<span class="post-author"><a href="#"></a></span>-->
-                <span class="comments-link"><a href="{{ post.get_absolute_url }}#comment-are">{{ post.postcomment_set.count }} Comment{{ post.postcomment_set.count|pluralize }}</a></span>
-                <span class="views-count"><a href="{{ post.get_absolute_url }}">{{ post.views }} Read</a></span>
-            </div>
-        </header>
-        <div class="entry-content clearfix">
-            <p>{{ post.excerpt }}</p>
-            <div class="read-more cl-effect-14">
-                <a href="{{ post.get_absolute_url }}" class="more-link">Read more <span class="meta-nav">→</span></a>
-            </div>
+{% for post in post_list %}
+<article class="post post-{{ post.pk }}">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </h1>
+        <div class="entry-meta">
+            <span class="post-category"><a href="{% url 'myblog:category' post.category.pk %}">{{ post.category }}</a></span>
+            <span class="post-date"><a
+                    href="{% url 'myblog:archives' post.created_time.year post.created_time.month %}"><time
+                        class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
+            <!--<span class="post-author"><a href="#"></a></span>-->
+            <span class="views-count"><a href="{{ post.get_absolute_url }}">{{ post.views }} Read</a></span>
         </div>
-    </article>
-    {% empty %}
-    <div class="no-post">No posted articles!</div>
-    {% endfor %}
-    {% if is_paginated %}    
-    <div class="pagination">
-        {% if first %}
-            <a href="?page=1">1</a>
-        {% endif %}
-        {% if left %}
-            {% if left_has_more %}
-                <span>...</span>
-            {% endif %}
-            {% for i in left %}
-                <a href="?page={{ i }}">{{ i }}</a>
-            {% endfor %}
-        {% endif %}
-        <a href="?page={{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a>
-        {% if right %}
-            {% for i in right %}
-                <a href="?page={{ i }}">{{ i }}</a>
-            {% endfor %}
-            {% if right_has_more %}
-                <span>...</span>
-            {% endif %}
-        {% endif %}
-        {% if last %}
-            <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
-        {% endif %}
+    </header>
+    <div class="entry-content clearfix">
+        <p>{{ post.excerpt }}</p>
+        <div class="read-more cl-effect-14">
+            <a href="{{ post.get_absolute_url }}" class="more-link">Read more <span class="meta-nav">→</span></a>
+        </div>
     </div>
-    {% endif %}    
+</article>
+{% empty %}
+<div class="no-post">No posted articles!</div>
+{% endfor %}
+{% if is_paginated %}
+<div class="pagination">
+    {% if first %}
+    <a href="?page=1">1</a>
+    {% endif %}
+    {% if left %}
+    {% if left_has_more %}
+    <span>...</span>
+    {% endif %}
+    {% for i in left %}
+    <a href="?page={{ i }}">{{ i }}</a>
+    {% endfor %}
+    {% endif %}
+    <a href="?page={{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a>
+    {% if right %}
+    {% for i in right %}
+    <a href="?page={{ i }}">{{ i }}</a>
+    {% endfor %}
+    {% if right_has_more %}
+    <span>...</span>
+    {% endif %}
+    {% endif %}
+    {% if last %}
+    <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+    {% endif %}
+</div>
+{% endif %}
 {% endblock main %}

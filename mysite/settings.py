@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.jianyang995.com']
 
 INSTALLED_APPS = [
     'myblog',
-    'mycomments',
     'myprojects',
     'haystack',
     # 'rest_framework',

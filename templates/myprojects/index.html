@@ -1,116 +1,111 @@
 {% extends 'myprojects/base.html' %}
 {% load static %}
 {% block title %}
-    {{ title }}
+{{ title }}
 {% endblock title %}
 {% block style %}
-    <style>
-        .project-row {
-            margin: 8px -16px;
-        }
+<style>
+    .project-row {
+        margin: 8px -16px;
+    }
 
-        /* Add padding BETWEEN each column (if you want) */
-        .project-row,
-        .project-row > .project-column {
-            padding: 8px;
-        }
+    /* Add padding BETWEEN each column (if you want) */
+    .project-row,
+    .project-row>.project-column {
+        padding: 8px;
+    }
 
-        /* Create four equal columns that floats next to each other */
+    /* Create four equal columns that floats next to each other */
+    .project-column {
+        float: left;
+        margin-bottom: 5%;
+        width: 45%;
+    }
+
+    /* Clear floats after rows */
+    .project-row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Content */
+    .project-content {
+        background-color: white;
+        padding: 10px;
+    }
+
+    .source-code,
+    .demo-link {
+        text-decoration: underline;
+    }
+
+    /* Responsive layout - makes a two column-layout instead of four columns */
+    @media screen and (max-width: 900px) {
         .project-column {
-            float: left;
-            margin-bottom: 5%;
-            width: 45%;
+            width: 50%;
         }
+    }
 
-        /* Clear floats after rows */
-        .project-row:after {
-            content: "";
-            display: table;
-            clear: both;
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+        .project-column {
+            width: 100%;
         }
-
-        /* Content */
-        .project-content {
-            background-color: white;
-            padding: 10px;
-        }
-
-        .source-code, .demo-link {
-            text-decoration: underline;
-        }
-
-        /* Responsive layout - makes a two column-layout instead of four columns */
-        @media screen and (max-width: 900px) {
-            .project-column {
-                width: 50%;
-            }
-        }
-
-        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-            .project-column {
-                width: 100%;
-            }
-        }
-
-    </style>
+    }
+</style>
 {% endblock style %}
 {% block main %}
-    <div class="project-row">
-        {% for project in project_list %}
-            <div class="project-column">
-                <div class="project-content">
-                    <a href="{{ project.get_absolute_url }}"><img src="{{ project.image }}" alt="Cover Image"
-                                                                  style="width:400px; height: 200px"></a>
-                    <h3 class="entry-title" style="margin-bottom: 10px; font-size: 1.4em">
-                        <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
-                    </h3>
-                    <div class="entry-meta">
-                        <span class="project-category"><a
-                                href="{% url 'myprojects:category' project.category.pk %}">{{ project.category }}</a></span>
-                        <span class="project-date"><a href="{% url 'myprojects:archives' project.created_time.year %}"><time
-                                class="entry-date"
-                                datetime="{{ project.created_time }}">{{ project.created_time.year }}</time></a></span>
-                        <!--<span class="project-author"><a href="#"></a></span>-->
-                        <span class="comments-link"><a
-                                href="{{ project.get_absolute_url }}#comment-are">{{ project.projectcomment_set.count }} Comment{{ project.projectcomment_set.count|pluralize }}</a></span>
-                        <span class="views-count"><a href="{{ project.get_absolute_url }}">{{ project.views }} Read</a></span>
-                        <br>
-                        <span><a class="source-code" href="{{ project.source }}">Source Code</a></span>
-                        <span style="padding-left: 20px"><a class="demo-link"
-                                                            href= {{ project.demo }}>Demo Link</a></span>
-                    </div>
-                </div>
+<div class="project-row">
+    {% for project in project_list %}
+    <div class="project-column">
+        <div class="project-content">
+            <a href="{{ project.get_absolute_url }}"><img src="{{ project.image }}" alt="Cover Image"
+                    style="width:400px; height: 200px"></a>
+            <h3 class="entry-title" style="margin-bottom: 10px; font-size: 1.4em">
+                <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+            </h3>
+            <div class="entry-meta">
+                <span class="project-category"><a href="{% url 'myprojects:category' project.category.pk %}">{{ project.category }}</a></span>
+                <span class="project-date"><a href="{% url 'myprojects:archives' project.created_time.year %}"><time
+                            class="entry-date" datetime="{{ project.created_time }}">{{ project.created_time.year }}</time></a></span>
+                <!--<span class="project-author"><a href="#"></a></span>-->
+                <span class="views-count"><a href="{{ project.get_absolute_url }}">{{ project.views }} Read</a></span>
+                <br>
+                <span><a class="source-code" href="{{ project.source }}">Source Code</a></span>
+                <span style="padding-left: 20px"><a class="demo-link" href={{ project.demo }}>Demo Link</a></span>
             </div>
-        {% empty %}
-            <div class="no-project">No projects!</div>
-        {% endfor %}
-    </div>
-    {% if is_paginated %}
-        <div class="pagination">
-            {% if first %}
-                <a href="?page=1">1</a>
-            {% endif %}
-            {% if left %}
-                {% if left_has_more %}
-                    <span>...</span>
-                {% endif %}
-                {% for i in left %}
-                    <a href="?page={{ i }}">{{ i }}</a>
-                {% endfor %}
-            {% endif %}
-            <a href="?page={{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a>
-            {% if right %}
-                {% for i in right %}
-                    <a href="?page={{ i }}">{{ i }}</a>
-                {% endfor %}
-                {% if right_has_more %}
-                    <span>...</span>
-                {% endif %}
-            {% endif %}
-            {% if last %}
-                <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
-            {% endif %}
         </div>
+    </div>
+    {% empty %}
+    <div class="no-project">No projects!</div>
+    {% endfor %}
+</div>
+{% if is_paginated %}
+<div class="pagination">
+    {% if first %}
+    <a href="?page=1">1</a>
     {% endif %}
+    {% if left %}
+    {% if left_has_more %}
+    <span>...</span>
+    {% endif %}
+    {% for i in left %}
+    <a href="?page={{ i }}">{{ i }}</a>
+    {% endfor %}
+    {% endif %}
+    <a href="?page={{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a>
+    {% if right %}
+    {% for i in right %}
+    <a href="?page={{ i }}">{{ i }}</a>
+    {% endfor %}
+    {% if right_has_more %}
+    <span>...</span>
+    {% endif %}
+    {% endif %}
+    {% if last %}
+    <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+    {% endif %}
+</div>
+{% endif %}
 {% endblock main %}

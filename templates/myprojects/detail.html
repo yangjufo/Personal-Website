@@ -15,11 +15,9 @@
     <header class="entry-header">
         <h1 class="entry-title">{{ project.title }}</h1>
         <div class="entry-meta">
-            <span class="project-category"><a href="{% url 'myprojects:category' project.category.pk %}">{{
-                    project.category.name }}</a></span>
+            <span class="project-category"><a href="{% url 'myprojects:category' project.category.pk %}">{{ project.category.name }}</a></span>
             <span class="project-date"><a href="{% url 'myprojects:archives' project.created_time.year %}"><time
-                        class="entry-date" datetime="{{ project.created_time }}">{{ project.created_time|date:'F' }}, {{
-                        project.created_time.year }}, </time></a></span>
+                        class="entry-date" datetime="{{ project.created_time }}">{{ project.created_time|date:'F' }}, {{ project.created_time.year }}, </time></a></span>
             <!--<span class="project-author"><a href="#">Jian Yang</a></span>-->
             <span class="views-count"><a href="#">{{ project.views }} Read</a></span>
             <br>

@@ -4,7 +4,6 @@ from django.utils.text import slugify
 from django.views.generic import ListView, DetailView
 from markdown.extensions.toc import TocExtension
 
-from mycomments.forms import PostCommentForm
 from .models import Post, Category, Tag
 
 MONTH_NAME_MAP = {
@@ -45,16 +44,6 @@ class PostDetailView(DetailView):
         post.toc = md.toc
         return post
 
-    def get_context_data(self, **kwargs):
-        context = super(PostDetailView, self).get_context_data(**kwargs)
-        form = PostCommentForm()
-        comment_list = self.object.postcomment_set.all()
-        context.update({
-            'form': form,
-            'comment_list': comment_list
-        })
-        return context
-
 
 class IndexView(ListView):
     model = Post
@@ -91,7 +80,8 @@ class IndexView(ListView):
         page_range = paginator.page_range
 
         if page_number != 1:
-            left = page_range[(page_number - 3) if (page_number - 3) > 0 else 0:page_number - 1]
+            left = page_range[(page_number - 3)
+                              if (page_number - 3) > 0 else 0:page_number - 1]
             if left[0] > 2:
                 left_has_more = True
             if left[0] > 1:
